@@ -1,0 +1,74 @@
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Open+Sans');
+
+body {
+    font-family: 'Arial', sans-serif;
+    font-family: 'Arial ', sans-serif;
+}
+
+input[type="text"], textarea[name="notes"] {
+    font-size: 1.6rem;
+    /*color: #ff5227;*/
+    width: 100%;
+    line-height: 35px;
+    /*padding-left: 3rem;*/
+}
+
+.error{
+    display: none;
+    margin-left: 10px;
+}
+
+.error_show{
+    color: red;
+    margin-left: 10px;
+}
+
+
+input.invalid, textarea.invalid{
+    border: 2px solid red;
+}
+
+input.valid, textarea.valid{
+    border: 3px solid green;
+}
+
+
+.custom-select2 {
+    position: relative;
+    font-family: Arial;
+    width: auto;
+}
+
+
+.select-selected2 {
+    background-color: #2e353d;
+    border: 1px;
+    border-radius: 5px;
+
+}
+
+/* Style the arrow inside the select element: */
+.select-selected2:after {
+    position: absolute;
+    content: "";
+    top: 14px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: #fff transparent transparent transparent;
+}
+
+
+
+/* style the items (options), including the selected item: */
+.select-items2 div,.select-selected2 {
+    color: #ffffff;
+    padding: 2px 16px;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+
+    cursor: pointer;
+}
+

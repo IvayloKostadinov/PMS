@@ -1,0 +1,33 @@
+.table-wrapper {
+    margin-top: 50px;
+    margin-bottom: 50px;
+     background: #020203;
+     background-image: linear-gradient(-100deg,black,#2e353d);
+     box-sizing: border-box;
+     box-shadow : 0 15px 25px rgba(0,0,0,.5);
+     border-radius: 15px;
+     color: white;
+}
+
+
+.table thead>tr>th {
+    font-weight: bold;
+    font-size: 16px;
+    color: #e57528;
+}
+.table tbody>tr>td{
+    border : none;
+    vertical-align: middle;
+}
+
+.table tbody>tr:hover {
+    background-color: #e57528;
+}
+
+#first-td {
+border-radius:15px 0px 0px 15px;
+}
+
+#last-td {
+ border-radius:0px 15px 15px 0px;
+}

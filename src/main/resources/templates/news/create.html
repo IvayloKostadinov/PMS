@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>PMS</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" type="text/css" media="all" href="../../static/css/styles.css"
+        th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" type="text/css" media="all" href="../../static/css/news.css" th:href="@{/css/news.css}" />
+</head>
+
+<body>
+    <th:block th:replace="fragments/navbar :: navbar">
+    </th:block>
+
+    <th:block th:replace="fragments/side-menu :: side-menu">
+    </th:block>
+
+    <div class="container news-container">
+
+        <div th:if="${error != null}" id="error" class="alert alert-danger alert-dismissible fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <p th:text="${error}"></p>
+        </div>
+        <h1 align="center">Add News</h1>
+        <hr />
+
+        <div class="row news-row-style col-md-9 button-style box">
+            <form th:object="${news}" th:action="@{~/news/create}" th:method="POST">
+                <div class="col-md-3 news-container-style">
+                    <input type="hidden" class="form-control" name="id" th:field="*{id}">
+                    <input th:value="*{#authentication.getPrincipal().getId()}" type="hidden" name="author">
+                <div class="form-group">
+                    <label for="formControlInputNewsTitle">Title</label>
+                    <input type="text"  th:field="${news.title}" class="form-control" name="title" id="formControlInputNewsTitle"
+                           placeholder="Title" required>
+                </div>
+                <div class="form-group">
+                    <label for="formControlTextareaNewsText">Enter your content</label>
+                    <textarea class="form-control news-content-style" th:field="${news.content}" name="content" id="formControlTextareaNewsText"
+                              rows="3" required></textarea>
+                </div>
+                <input type="hidden" name="publishingDate">
+                <button type="submit" class="kris-btn">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div class="clearFloat clearFloat-news"></div>
+
+</div>
+<div class="clearFloat clearFloat-news"></div>
+
+<th:block th:replace="fragments/footer :: footer">
+</th:block>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/core.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<script src="../../static/js/custom.js" th:src="@{/js/custom.js}"></script>
+<script src="../../static/js/jQuery.min.js" th:src="@{/js/jQuery.min.js}"></script>
+
+</html>

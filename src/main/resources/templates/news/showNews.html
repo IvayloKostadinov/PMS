@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>PMS</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="all" href="../../static/css/styles.css"
+          th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../../static/css/news.css" th:href="@{/css/news.css}"/>
+
+
+</head>
+
+<body>
+    <div id="home"></div>
+    <th:block th:replace="fragments/navbar :: navbar">
+    </th:block>
+    <th:block th:replace="fragments/side-menu :: side-menu">
+    </th:block>
+
+    <div th:if="${#lists.isEmpty(newsList)}">
+        <div  class="alert alert-info" role="alert">
+            <h3 class="text-center"><strong>Heads up!</strong> There are no news in the system</h3>
+        </div>
+        <div class="text-center" style="margin-right:20px">
+            <a  th:href="@{'/news/add'}" type="button" class="btn btn-warning btn-circle btn-xl orange"><i class="glyphicon glyphicon-plus"></i></a>
+        </div>
+    </div>
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <div th:if="${not #lists.isEmpty(newsList)}" >
+    <div id="sidebar-wrapper">
+        <nav id="spy">
+            <ul class="sidebar-nav nav">
+                <li class="sidebar-brand">
+                    <a href="#home"><span>News</span></a>
+                </li>
+                <li th:each="news : ${newsList}">
+                    <a th:href="'#'+${news.id}" data-scroll>
+                        <span th:text="${news.title}">Anchor 1</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    </div>
+
+    <!-- Page content -->
+    <div id="page-content-wrapper">
+        <div class="page-content inset" data-spy="scroll" data-target="#spy">
+            <div class="content-header">
+                <h1>
+                    <a id="menu-toggle" href="#">
+                        <i class="fa fa-bars"></i>
+                    </a>
+
+                </h1>
+            </div>
+            <div th:each="news : ${newsList}" class="row col-md-11 ">
+                <div class="col-md-8 well box">
+                    <form action="">
+                        <h5 th:text="|Created By:  ${news.author.username}" style="float: right;"></h5>
+                        <legend th:text="${news.title}" th:id="${news.id}">Anchor 1</legend>
+                        <p th:text="${news.content}"></p>
+
+                        <h5 th:text="|Date:  ${news.publishingDate}" style="float: right;"></h5>
+
+                        <div class="col-md-12 ">
+                            <a sec:authorize="hasAuthority('WRITER')"  type="submit" th:href="@{'/news/' + ${news.id} + '/edit'}">Edit</a>
+                            <a sec:authorize="hasAuthority('WRITER')"  type="submit" th:href="@{'/news/' + ${news.id} + '/delete'}">Delete</a>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <a sec:authorize="hasAuthority('WRITER')"  th:href="@{'/news/add'}" type="button" class="btn btn-warning btn-circle btn-xl orange"><i class="glyphicon glyphicon-plus"></i></a>
+            <div class="clearFloat"></div>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="fragments/footer :: footer"></th:block>
+
+</body>
+
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+
+    /*Menu-toggle*/
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("active");
+    });
+
+    /*Scroll Spy*/
+    $('body').scrollspy({target: '#spy', offset: 80});
+
+    /*Smooth link animation*/
+    $('a[href*=#]:not([href=#])').click(function () {
+        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+            if (target.length) {
+                $('html,body').animate({
+                    scrollTop: target.offset().animate
+                }, 4000);
+                return false;
+            }
+        }
+    });
+</script>
+<script src="../../static/js/custom.js" th:src="@{../js/custom.js}"></script>
+
+</html>

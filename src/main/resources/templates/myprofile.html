@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8" />
+    <title></title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+          crossorigin="anonymous">
+    <link href="../static/css/styles.css" th:href="@{/css/styles.css}" type="text/css" rel="stylesheet" />
+    <link href="../static/css/login.css" th:href="@{/css/login.css}" type="text/css" rel="stylesheet" />
+    <link href="../static/css/login.css" th:href="@{/css/myprofile.css}" type="text/css" rel="stylesheet" />
+
+
+
+</head>
+
+<body>
+<th:block th:replace="fragments/navbar :: navbar">
+</th:block>
+<th:block th:replace="fragments/side-menu :: side-menu">
+</th:block>
+
+<div class="row manager-info-wrapper">
+    <div class="col-md-4 manager-info-account">
+        <div class="manager-info">
+            <span>Username : </span>
+            <p th:text="${currentUser.username}"></p>
+        </div>
+        <div class="manager-info">
+            <span>First name : </span>
+            <p th:text="${currentUser.firstName}"></p>
+        </div>
+        <div class="manager-info">
+            <span>Family name : </span>
+            <p th:text="${currentUser.familyName}"></p>
+        </div>
+        <div class="manager-info">
+            <span>Email : </span>
+            <p th:text="${currentUser.email}"></p>
+        </div>
+        <div class="manager-info">
+            <span>Inbound Email : </span>
+            <p th:text="${currentUser.inboundEmail}"></p>
+        </div>
+        <div class="manager-info">
+            <span>Outbound Email : </span>
+            <p th:text="${currentUser.outboundEmail}"></p>
+        </div>
+        <div class="manager-info">
+            <span>Profile Status : </span>
+            <p th:text="${currentUser.status}"></p>
+        </div>
+        <div class="manager-info" th:each="authorities : ${currentUser.authorities}">
+            <span>Granted Authority : </span>
+            <p th:text="${authorities.authority}"></p>
+        </div>
+    </div>
+    <div class="col-md-6 container manager-info-details">
+        <div class="manager-info">
+            <p th:text="${currentUser.username}"></p>
+        </div>
+    </div>
+
+</div>
+
+<th:block th:replace="fragments/footer :: footer"></th:block>
+
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/core.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="../static/js/custom.js" th:src="@{../js/custom.js}"></script>
+
+</html>

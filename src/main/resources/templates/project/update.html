@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>PMS</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+          crossorigin="anonymous">
+
+
+    <link rel="stylesheet" type="text/css" media="all" href="../../static/css/styles.css" th:href="@{/css/styles.css}"/>
+</head>
+
+<body>
+<th:block th:replace="fragments/navbar :: navbar">
+</th:block>
+
+<th:block th:replace="fragments/side-menu :: side-menu">
+</th:block>
+
+
+<div class="container" sec:authorize="isAuthenticated()">
+    <div th:if="${error != null}" id="error" class="alert alert-danger alert-dismissible fade in">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <p th:text="${error}"></p>
+    </div>
+    <h1>Update Project</h1>
+    <hr/>
+
+    <div class="row">
+        <form th:object="${project}" th:action="@{/project/update}" th:method="POST">
+            <input type="hidden" class="form-control" name="id" th:field="*{id}">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="exampleFormControlInputProjectNumberUpdate">Number</label>
+                    <input th:field="*{projectNumber}" type="number" class="form-control" name="projectNumber"
+                           id="exampleFormControlInputProjectNumberUpdate"
+                           placeholder="Number">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInputProjectNameUpdate">Name</label>
+                    <input th:field="*{projectName}" type="text" class="form-control" name="projectName"
+                           id="exampleFormControlInputProjectNameUpdate"
+                           placeholder="Name">
+                </div>
+
+                <label for="exampleFormControlInput1">Manager</label>
+                <div class="row form-group">
+                    <div class="col-md-2 dropdown">
+                        <div class="custom-select" >
+                            <select th:field="*{manager}">
+                                <option value="" selected disabled hidden>Select Manager:</option>
+                                <option th:each="manager : ${managers}" name="username" id="selectedManager"
+                                        th:value="${{manager}}" th:text="${manager.getUsername()}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Client</label>
+                    <input type="hidden" class="form-control" name="id" th:field="*{client.id}">
+                    <input th:field="*{client.clientName}" type="text" class="form-control" name="clientName"
+                           id="exampleFormControlInput1"
+                           placeholder="Client">
+                </div>
+
+                <label for="exampleFormControlInput1">Team</label>
+                <div class="row form-group">
+                    <div class="col-md-2 dropdown">
+                        <div class="custom-select" >
+                            <select class="dropdown-menu" th:field="*{team}">
+                                <option value="" selected disabled hidden>Select Team:</option>
+                                <option th:each="team : ${teams}" id="selectedTeam" name="teamName" th:value="${{team}}"
+                                        th:text="${team.getTeamName()}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-8">
+                    <h3>Phases</h3>
+                </div>
+                <th:block th:replace="fragments/phaseModal :: modal">
+                </th:block>
+                <hr/>
+
+                <table class="table table-hover ">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Budget</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    <tr th:each="phase : ${phases}">
+                        <td th:text="${phase.phaseName}"></td>
+                        <td th:text="${phase.getPhaseStartDateFormatted()}"></td>
+                        <td th:text="${phase.getPhaseEndDateFormatted()}"></td>
+                        <td th:text="${phase.phaseBudget}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-2">
+                        <h4>Budget</h4>
+                    </div>
+                    <div class="col-md-8">
+                        <input th:field="*{budget}" type="number" class="form-control" name="budget" id="budgetUpdate"
+                               placeholder="budget">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+
+                <div class="form-group">
+                    <label for="startDateUpdate">Start Date</label>
+                    <input th:field="*{startDate}" type="date" class="form-control" name="startDate" id="startDateUpdate"
+                           placeholder="Start Dae">
+                </div>
+                <div class="form-group">
+                    <label for="endDateUpdate">Dead Line</label>
+                    <input th:field="*{endDate}" type="date" class="form-control" name="endDate" id="endDateUpdate"
+                           placeholder="Dead Line">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextareaProjectDescriptionUpdate">Description</label>
+                    <textarea th:field="*{description}" class="form-control" name="description"
+                              id="exampleFormControlTextareaProjectDescriptionUpdate"
+                              rows="3"></textarea>
+                </div>
+
+                <label for="exampleFormControlInput1">Status</label>
+                <div class="row form-group">
+                    <div class="col-md-2 dropdown">
+                        <div class="custom-select" >
+                            <select class="dropdown-menu" name="accessStatus" th:field="*{accessStatus}">
+                                <option value="" selected disabled hidden>Select Status:</option>
+                                <option value="0" class="register-select-options">Private</option>
+                                <option value="1" class="register-select-options">Public</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+        </form>
+        <div class="clearFloat clearFloat-news"></div>
+    </div>
+</div>
+
+<th:block th:replace="fragments/footer :: footer">
+</th:block>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/core.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<script src="../../static/js/custom.js" th:src="@{/js/custom.js}"></script>
+<script src="../../static/js/jQuery.min.js" th:src="@{/js/jQuery.min.js}"></script>
+
+
+</html>

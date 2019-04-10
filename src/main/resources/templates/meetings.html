@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:spring="http://java.sun.com/xml/ns/javaee">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Create New Meeting</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+          crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/create-meeting.css"
+          th:href="@{/css/create-meeting.css}"/>
+</head>
+
+<body>
+
+<th:block th:replace="fragments/navbar :: navbar">
+</th:block>
+<th:block th:replace="fragments/side-menu :: side-menu">
+</th:block>
+
+<div class="container" sec:authorize="isAuthenticated()">
+    <div th:if="${error != null}" id="error" class="alert alert-danger alert-dismissible fade in">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <p th:text="${error}"></p>
+    </div>
+    <hr>
+    <h1>All Meetings</h1>
+    <hr/>
+    <div class="row">
+        <form th:object="${meeting}">
+
+            <div class="col-md-12">
+
+                <table class="table table-hover ">
+                    <thead>
+                    <tr>
+
+                        <th>Meeting Theme</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Notes</th>
+                        <th>Type</th>
+                        <th>Show Tasks</th>
+                        <th>Add Task</th>
+
+
+                    </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    <tr th:each="meeting : ${project}">
+                        <td th:text="${meeting.getMeetingTheme()} ?: ' '"/>
+                        <td th:text="${meeting.getStartDate()} ?: ' '"/>
+                        <td th:text="${meeting.getEndTime()} ?: ' '"/>
+                        <td th:text="${meeting.getNotes()} ?: ' '"/>
+                        <td th:text="${meeting.getMeetingType()} ?: ' '"/>
+                        <td><a th:href="@{'~/meeting/'+${meeting.id}+'/tasks'}">Show</a></td>
+                        <td><a th:href="@{'~/task/'+${meeting.id}}">Add</a></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+        </form>
+
+    </div>
+</div>
+
+<th:block th:replace="fragments/footer :: footer"></th:block>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+<script src="../../static/js/custom.js" th:src="@{/js/custom.js}"></script>
+<script src="../../static/js/jQuery.min.js" th:src="@{/js/jQuery.min.js}"></script>
+
+
+</html>

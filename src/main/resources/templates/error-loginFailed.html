@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8" />
+    <title></title>
+
+
+    <!--&lt;!&ndash; Latest compiled and minified CSS &ndash;&gt;-->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"-->
+    <!--crossorigin="anonymous" th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">-->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+          crossorigin="anonymous">
+    <!--&lt;!&ndash; Latest compiled and minified JavaScript &ndash;&gt;-->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"-->
+    <!--integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"-->
+    <!--crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>-->
+    <link href="../static/css/styles.css" th:href="@{/css/styles.css}" type="text/css" rel="stylesheet" />
+    <link href="../static/css/login.css" th:href="@{/css/login.css}" type="text/css" rel="stylesheet" />
+
+
+
+
+</head>
+
+<body>
+<th:block th:replace="fragments/navbar :: navbar">
+</th:block>
+<th:block th:replace="fragments/side-menu :: side-menu">
+</th:block>
+
+<div class="box">
+    <h2 class="login-heading">Login</h2>
+    <form method="post" th:method="post" th:action="@{/login}">
+        <div class="inputBox">
+            <input type="text" name="username" required>
+            <label>Username</label>
+        </div>
+
+        <div class="inputBox">
+            <input type="Password" name="password" required>
+            <label>Password</label>
+        </div>
+        <div id="error" class="alert alert-danger alert-dismissible fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <p th:text="'Invalid username or password'"></p>
+        </div>
+        <div class="checkBox">
+            <input type="checkbox" name="remember-me" id="remember-me">
+            <label>Remember me</label>
+            <a class="forgottenPassword" href="#">Forgotten password</a>
+        </div>
+        <input type="submit" name="" value="Submit">
+    </form>
+</div>
+<div class="clearFloat clearFloat-news"></div>
+<th:block th:replace="fragments/footer :: footer"></th:block>
+
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/core.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="../static/js/custom.js" th:src="@{../js/custom.js}"></script>
+
+</html>
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+
+<!--<head>-->
+    <!--<meta charset="utf-8">-->
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <!--&lt;!&ndash; The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags &ndash;&gt;-->
+
+    <!--<title>403 Forbidden/Login Failed </title>-->
+
+    <!--&lt;!&ndash; Google font &ndash;&gt;-->
+    <!--<link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,700" rel="stylesheet">-->
+
+    <!--&lt;!&ndash; Custom stlylesheet &ndash;&gt;-->
+    <!--<link type="text/css" rel="stylesheet" href="../static/css/error-page-style-loginFailed.css"-->
+          <!--th:href="@{/css/error-page-style-loginFailed.css}"/>-->
+<!--</head>-->
+
+<!--<body>-->
+<!--<div id="forbidden">-->
+    <!--<div class="forbidden">-->
+        <!--<div class="forbidden-403">-->
+            <!--<h1>Oops!</h1>-->
+            <!--<h2>Login failed! Try again.</h2>-->
+        <!--</div>-->
+        <!--<a href="/login">Go TO Login</a>-->
+    <!--</div>-->
+<!--</div>-->
+<!--</body>-->
+
+<!--<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>-->
+<!--<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>-->
+<!--</html>-->

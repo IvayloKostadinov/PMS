@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+          crossorigin="anonymous">
+
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/add-new-task.css"
+          th:href="@{/css/add-new-task.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+
+    <title>Add new task</title>
+
+</head>
+<body>
+<th:block th:replace="fragments/navbar :: navbar">
+</th:block>
+<th:block th:replace="fragments/side-menu :: side-menu">
+</th:block>
+<div class="row main-container">
+    <div class="col-md-8 col-sm-12">
+        <div class="form-wrapper box">
+            <span class="form-title">Add new task to meeting: </span>
+            <form id="createTaskForm" th:action="@{~/add-new-task}" th:object="${createTaskForm}" method="POST">
+                <input th:value="*{#authentication.getPrincipal().getId()}" type="hidden" name="taskCreator">
+                <input th:value="*{meeting.project.team.id}" type="hidden" name="team">
+                <input type="hidden" th:field="*{id}"/>
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <label for="title" class="col-form-label">Task Title*:</label>
+                        <input type="text" class="form-control" id="title" th:field="*{title}"
+                               th:errorclass="task-field-error">
+                        <span class="task-field-error-span" th:if="${#fields.hasErrors('title')}"
+                              th:errors="*{title}">Min length 3</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="project" class="col-form-label">Project Number*:</label>
+                        <input type="text" class="form-control" id="project" th:value="${projectId}"
+                               readonly="readonly">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="responsible" class="col-form-label">Responsible*:</label>
+                        <select id="responsible" class="form-control custom-select-sm" th:field="*{user}">
+                            <option value="" selected disabled>Please, select user:</option>
+                            <option th:each="user : ${users}" id="selectedUser" th:value="${{user}}"
+                                    th:text="${user.getFirstName() + ' ' + user.getFamilyName()}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="meetingId" class="col-form-label">Meeting Number*:</label>
+                        <input type="text" class="form-control" id="meetingId" name="meeting" th:field="*{meeting}"
+                               readonly="readonly">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="startDate" class="col-form-label">Assigned On*:</label>
+                        <input type="date" class="form-control" id="startDate" th:field="*{dateCreated}"
+                               th:errorclass="task-field-error">
+                        <span class="task-field-error-span" th:if="${#fields.hasErrors('dateCreated')}"
+                              th:errors="*{dateCreated}"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="meetingDate" class="col-form-label">Meeting Date*:</label>
+                        <input type="date" class="form-control" id="meetingDate" th:field="*{meetingDate}"
+                               th:errorclass="task-field-error">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="endDate" class="col-form-label">Deadline*:</label>
+                        <input type="date" class="form-control" id="endDate" th:field="*{deadline}"
+                               th:errorclass="task-field-error">
+                        <span class="task-field-error-span" th:if="${#fields.hasErrors('deadline')}"
+                              th:errors="*{deadline}"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="taskId" class="col-form-label">Task Number*:</label>
+                        <input type="text" class="form-control" id="taskId" th:field="*{taskNumber}"
+                               readonly="readonly">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="statusId" class="col-form-label">Status*:</label>
+                        <select id="statusId" class="form-control custom-select-sm" th:field="*{status}">
+                            <option value="" selected disabled>Please, select status:</option>
+                            <option th:each="status : ${statuses}" th:value="${status.key}" th:text="${status.value}"/>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="phaseId" class="col-form-label">Phase*:</label>
+                        <select id="phaseId" class="form-control custom-select-sm"
+                                th:field="*{projectPhase}">
+                            <option value="" selected disabled>Please, select phase:</option>
+                            <option th:each="phase : ${phases}" th:value="${phase.id}" th:text="${phase.phaseName}"/>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="resultId" class="col-form-label">Expected result*:</label>
+                        <input type="text" class="form-control" id="resultId" th:field="*{expectedOutcome}"
+                               th:errorclass="task-field-error">
+                        <span class="task-field-error-span" th:if="${#fields.hasErrors('expectedOutcome')}"
+                              th:errors="*{expectedOutcome}">Expected Outcome must be between 3 and 50 chars.</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="taskDescriptionId" class="col-form-label">Task Description*:</label>
+                        <textarea class="form-control" id="taskDescriptionId" th:field="*{description}"
+                                  th:errorclass="task-field-error"></textarea>
+                        <span class="task-field-error-span" th:if="${#fields.hasErrors('description')}"
+                              th:errors="*{description}">Description must be between 3 and 100 chars.</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-default" style="height: 50px">Save</button>
+
+                    </div>
+                    <div class="col-md-6">
+                        <a th:href="@{'/meeting/'+${projectId}+'/new'}" class="btn btn-danger" style="border-radius: 10px; font-size: 20px">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<th:block th:replace="fragments/footer :: footer"></th:block>
+
+</body>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="../static/js/custom.js" th:src="@{../js/custom.js}"></script>
+<script src="../static/js/tasksJs.js" th:src="@{../js/tasksJs.js}"></script>
+</html>

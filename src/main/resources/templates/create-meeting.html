@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:spring="http://java.sun.com/xml/ns/javaee">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Create New Meeting</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+          crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/create-meeting.css"
+          th:href="@{/css/create-meeting.css}"/>
+</head>
+
+<body>
+
+<th:block th:replace="fragments/navbar :: navbar">
+</th:block>
+<th:block th:replace="fragments/side-menu :: side-menu">
+</th:block>
+
+<div class="container" sec:authorize="isAuthenticated()">
+    <div th:if="${error != null}" id="error" class="alert alert-danger alert-dismissible fade in">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <p th:text="${error}"></p>
+    </div>
+    <hr>
+    <h1>New Meeting</h1>
+    <hr/>
+    <div class="row">
+        <form th:action="@{/meeting/create}" th:object="${meeting}" th:method="POST">
+            <div class="col-md-5">
+                <div class="form-group">
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3" for="meetingTheme">Theme</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control pull-right" name="meetingTheme"
+                                   id="meetingTheme"
+                                   placeholder="Theme" required>
+                            <span></span>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+
+                    <div class="col-md-6">
+                        <label class="control-label" for="exampleFormControlInput12">Start Time</label>
+                        <input type="datetime-local" class="form-control" name="startDate"
+                               id="exampleFormControlInput12"
+                               placeholder="Start Time" required>
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="control-label" for="exampleFormControlInput1">End Time</label>
+                        <input type="datetime-local" class="form-control" name="endTime" id="exampleFormControlInput1"
+                               placeholder="End Time" required>
+
+                    </div>
+
+
+                </div>
+                <div class="form-group">
+
+                    <div class="col-md-6">
+                        <label for="meetingType1" class="col-form-label ">Meeting type:</label>
+                        <div class="custom-select2">
+                            <select required id="meetingType1" class=" select-selected2 form-control"
+                                    name="meetingType">
+                                <option value="" selected disabled hidden>Select Meeting Type</option>
+                                <option th:each="meetingType : ${T(com.scalefocus.pms.domain.MeetingType).values()}"
+                                        th:value="${meetingType.displayName}"
+                                        th:text="${meetingType.displayName}"
+                                >val
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <input th:value="*{#authentication.getPrincipal().getId()}" type="hidden" name="createdBy">
+                    </div>
+
+
+                </div>
+
+                <div class="form-group">
+
+
+                    <div class="col-md-6">
+                        <label class="control-label" for="projectNumberInput" name="project">Project Name: </label>
+                        <input th:value="${project.getProjectName()}" readonly type="text" class="form-control "
+                               id="projectNumberInput"
+                               placeholder="Project #">
+
+                        <input th:value="${{project}}" readonly class="form-control " name="project" type="hidden">
+
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <label for="Notes" class="col-form-label">Notes:</label>
+                        <textarea class="form-control" id="Notes" name="notes"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <label for="Participants" class="col-form-label">Participants:</label>
+                        </div>
+
+                        <div class="form-group col-md-12">
+
+                            <li th:each="user : ${project.team.users}" th:text="${user.getFirstName()}"></li>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="col-md-7">
+
+                <h4>Tasks</h4>
+
+                <!--<div class="col-md-12">-->
+                <!--<a class="btn btn-primary pull-right" th:href="@{'~/task/'+${meeting.id}}">Add New Task</a>-->
+                <!--</div>-->
+                <div th:if="${#lists.isEmpty(project.tasks)}">
+                    <div class="alert alert-info" role="alert">
+                        <h5 class="text-center ">There are no tasks assigned to the meeting</h5>
+                    </div>
+                </div>
+
+                <div th:if="${not #lists.isEmpty(project.tasks)}">
+                    <table class="table table-hover ">
+                        <thead>
+                        <tr>
+
+                            <th>Task #</th>
+                            <th>Title</th>
+                            <th>Assigned On</th>
+                            <th>Description</th>
+                            <th>Date Created</th>
+                            <th>Dead Line</th>
+                            <th>Created By</th>
+
+                        </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                        <tr th:each="task : ${project.tasks}">
+
+                            <td th:text="${task.getTaskNumber()}"/>
+                            <td th:text="${task.getTitle()}"/>
+                            <td th:text="${task.getUser().firstName + ' ' + task.getUser().familyName}"/>
+                            <td th:text="${task.getDescription()}"/>
+                            <td th:text="${task.getDateCreated()}"/>
+                            <td th:text="${task.getDeadline()}"/>
+                            <td th:text="${task.getTaskCreator().getFirstName()}"/>
+
+
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row col-md-12">
+                <div class="pull-right">
+                    <button type="submit" class="btn btn-default">Save</button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<th:block th:replace="fragments/footer :: footer"></th:block>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+<script src="../../static/js/custom.js" th:src="@{/js/custom.js}"></script>
+<script src="../../static/js/jQuery.min.js" th:src="@{/js/jQuery.min.js}"></script>
+
+
+</html>

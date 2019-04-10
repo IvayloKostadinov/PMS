@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:spring="http://java.sun.com/xml/ns/javaee">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>All Tasks</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+          crossorigin="anonymous">
+    <!--<link rel="stylesheet" type="text/css" media="all" href="../static/css/projects.css"-->
+    <!--th:href="@{/css/projects.css}"/>-->
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/create-meeting.css"
+          th:href="@{/css/create-meeting.css}"/>
+</head>
+
+<body>
+
+<th:block th:replace="fragments/navbar :: navbar">
+</th:block>
+<th:block th:replace="fragments/side-menu :: side-menu">
+</th:block>
+
+<div class="container" sec:authorize="isAuthenticated()">
+
+    <hr>
+    <h1>All Tasks</h1>
+    <hr/>
+    <div class="row">
+        <form>
+            <div class="col-md-12">
+
+                <table class="table table-hover ">
+                    <thead>
+                    <tr>
+                        <th>Meeting ID</th>
+                        <th>Task #</th>
+                        <th>Title</th>
+                        <th>Assigned On</th>
+                        <th>Description</th>
+                        <th>Date Created</th>
+                        <th>Dead Line</th>
+                        <th>Created By</th>
+
+                    </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    <tr th:each="task : ${tasks}">
+                        <td th:text="${task.meeting.meetingTheme}"/>
+                        <td th:text="${task.getTaskNumber()}"/>
+                        <td th:text="${task.getTitle()}"/>
+                        <td th:text="${task.getUser().firstName + ' ' + task.getUser().familyName}"/>
+                        <td th:text="${task.getDescription()}"/>
+                        <td th:text="${task.getDateCreatedFormatted()}"/>
+                        <td th:text="${task.getDeadlineFormatted()}"/>
+                        <td th:text="${task.getTaskCreator().firstName+ ' '+ task.getTaskCreator().familyName}"/>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+
+<th:block th:replace="fragments/footer :: footer"></th:block>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script src="../../static/js/custom.js" th:src="@{/js/custom.js}"></script>
+<script src="../static/js/projects.js" th:src="@{../js/projects.js}"></script>
+<script src="../../static/js/jQuery.min.js" th:src="@{/js/jQuery.min.js}"></script>
+
+
+</html>

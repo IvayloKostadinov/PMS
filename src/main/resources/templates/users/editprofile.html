@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title></title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+          crossorigin="anonymous">
+
+    <link href="../../static/css/styles.css" th:href="@{/css/styles.css}" type="text/css" rel="stylesheet"/>
+    <link href="../../static/css/editprofile.css" th:href="@{~/css/editprofile.css}" type="text/css" rel="stylesheet"/>
+
+
+</head>
+
+<body>
+
+<th:block th:replace="fragments/navbar :: navbar">
+</th:block>
+<th:block th:replace="fragments/side-menu :: side-menu">
+</th:block>
+
+
+<div class="row">
+    <div class="col-md-4 box">
+        <h2 class="login-heading">Edit</h2>
+        <form method="post" th:object="${user}" th:method="post" th:action="@{~/users/profile/edit}">
+            <input type="hidden" class="form-control" name="id" th:field="*{id}">
+            <div class=" inputBox">
+                <input th:field="*{firstName}" type="text" name="firstName" required>
+                <label>First name</label>
+            </div>
+
+            <div class="inputBox">
+                <input th:field="*{familyName}" type="text" name="familyName" required>
+                <label>Last name</label>
+            </div>
+
+            <div class="inputBox">
+                <input th:field="*{email}" type="text" name="email" required>
+                <label>E-mail</label>
+            </div>
+
+            <div class="inputBox">
+                <input th:field="*{username}" type="text" name="username" required>
+                <label>Username</label>
+            </div>
+
+            <div class="inputBox">
+                <input th:field="*{password}" type="text" name="password" required>
+                <label>Password</label>
+            </div>
+
+            <div class="inputBox">
+                <input th:field="*{inboundEmail}" type="text" name="inboundEmail" required>
+                <label>Inbound Email</label>
+            </div>
+
+            <div class="inputBox">
+                <input th:field="*{outboundEmail}" type="text" name="outboundEmail" required>
+                <label>Outbound Email</label>
+            </div>
+
+            <div class="inputBox">
+                <select class="register-select" name="status" th:field="*{status}">
+                    <div class="register-select-options-container">
+                        <!--<option selected disabled hidden class="register-select-options-hidden"></option>-->
+                        <option value="1" class="register-select-options">Active</option>
+                        <option value="0" class="register-select-options">Inactive</option>
+                    </div>
+                </select>
+                <label>Status</label>
+            </div>
+
+            <div class="inputBox">
+                <select class="register-select" th:field="*{authorities}">
+                    <div class="register-select-options-container">
+                        <option th:each="role : ${roles}" th:value="${{role}}" th:text="${role.authority}" class="register-select-options">Administator
+                        </option>
+                    </div>
+                </select>
+                <label>Role</label>
+            </div>
+            <!--<div class="user-info" th:each="authorities : ${user.authorities}">-->
+                <!--<span>Granted Authority : </span>-->
+                <!--<p th:text="${authorities.authority}"></p>-->
+            <!--</div>-->
+            <input type="submit" name="" value="Confirm">
+        </form>
+    </div>
+
+    <div class="col-md-6 user-projects-wrapper">
+        <h2>Projects</h2>
+        <table class="table table-hover text-centered">
+            <thead>
+            <tr>
+                <th>Project Name</th>
+                <th>Project Number</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="projectNumber : ${projects}">
+                <td class="first-td" th:text="${projectNumber.projectName}">asd</td>
+                <td th:text="${projectNumber.projectNumber}">ads</td>
+                <td class="last-td"><a class="btn btn-default" href="#" th:href="@{'/projects/' + ${projectNumber.id}}" role="button">Show</a>
+                    <!--<td><a sec:authorize="hasAuthority('ADMIN')" class="btn btn-default" href="#" th:href="@{'/users/' + ${user.id} + '/delete'}" role="button">Delete</a></td>-->
+                    <!--<td><a class="btn btn-default" href="#" role="button">Update</a></td>-->
+
+            </tr>
+            </tbody>
+        </table>
+        <h2>Teams</h2>
+        <table class="table table-hover text-centered">
+            <thead>
+            <tr>
+                <th>Team Name</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="team : ${user.teams}">
+                <td class="first-td" th:text="${team.teamName}">asd</td>
+                <td class="last-td"><a class="btn btn-default" href="#" th:href="@{'/teams/' + ${team.id} + '/members'}" role="button">Show Members</a>
+                    <!--<td class="last-td" th:text="${team.projectNumber}">ads</td>-->
+                    <!--<td><a sec:authorize="hasAuthority('ADMIN')" class="btn btn-default" href="#" th:href="@{'/users/' + ${user.id} + '/delete'}" role="button">Delete</a></td>-->
+                    <!--<td><a class="btn btn-default" href="#" role="button">Update</a></td>-->
+
+            </tr>
+            </tbody>
+        </table>
+        <div class="clearFloat clearFloat-news"></div>
+    </div>
+    <div class="clearFloat clearFloat-news"></div>
+</div>
+<th:block th:replace="fragments/footer :: footer"></th:block>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/core.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="../../static/js/custom.js" th:src="@{../js/custom.js}"></script>
+
+</html>

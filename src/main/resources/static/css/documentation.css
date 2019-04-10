@@ -1,0 +1,70 @@
+
+.page-header{
+    margin-left: 15px;
+}
+
+
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+}
+ul.documentation-ul{
+    width: 95%;
+}
+li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+form ul {
+    margin: 15px;
+}
+
+.entire-thing{
+    /*display: inline-block;*/
+    width:100%; /* or whatever width you want. */
+    /*dth:250px; !* or whatever width you want. *!*/
+}
+
+
+li a:hover {
+    background-color: #555;
+    color: white;
+    text-decoration: none;
+}
+
+
+.ad-left {
+    float: left;
+}
+
+.ad-right {
+    float: right;
+    margin-right: 25px;
+    width:75%;
+
+}
+
+.fr-wrapper{
+    height: 300px;
+}
+
+#input {
+    margin-top: 10px;
+}
+@media (min-width: 768px){
+    .container {
+        width: 100%;
+    }
+
+}
+
+.btn-default {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

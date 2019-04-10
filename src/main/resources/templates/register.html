@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <title></title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+          crossorigin="anonymous">
+
+    <link href="../static/css/styles.css" th:href="@{/css/styles.css}" type="text/css" rel="stylesheet" />
+    <link href="../static/css/register.css" th:href="@{/css/register.css}" type="text/css" rel="stylesheet" />
+
+
+</head>
+
+<body>
+
+<th:block th:replace="fragments/navbar :: navbar">
+</th:block>
+<th:block th:replace="fragments/side-menu :: side-menu">
+</th:block>
+
+
+    <div class="box">
+        <h2 class="login-heading">Register</h2>
+        <form method="post" th:method="post" th:action="@{/register}">
+            <div class=" inputBox">
+                <input type="text" name="firstName" required>
+                <label>First name</label>
+            </div>
+
+            <div class="inputBox">
+                <input type="text" name="familyName" required>
+                <label>Last name</label>
+            </div>
+
+            <div class="inputBox">
+                <input type="text" name="email" required>
+                <label>E-mail</label>
+            </div>
+
+            <div class="inputBox">
+                <input type="text" name="username" required>
+                <label>Username</label>
+            </div>
+
+            <div class="inputBox">
+                <input type="Password" name="password" required>
+                <label>Password</label>
+            </div>
+
+            <div class="inputBox">
+                <input type="Password" name="confirmPassword" required>
+                <label>Confirm password</label>
+            </div>
+
+            <div class="inputBox">
+                <select class="register-select" name="status">
+                    <div class="register-select-options-container">
+                        <option selected disabled hidden class="register-select-options-hidden"></option>
+                        <option value="1" class="register-select-options">Active</option>
+                        <option value="0" class="register-select-options">Inactive</option>
+                    </div>
+                </select>
+                <label>Status</label>
+            </div>
+
+            <div class="inputBox">
+                <select class="register-select" name="authorities">
+                    <div class="register-select-options-container">
+                        <option selected disabled hidden class="register-select-options-hidden"></option>
+                        <option value="1" class="register-select-options">SYSTEM ADMIN</option>
+                        <option value="3" class="register-select-options">MANAGER</option>
+                        <option value="4" class="register-select-options">MEMBER</option>
+                    </div>
+                </select>
+                <label>Role</label>
+            </div>
+            <input type="submit" name="" value="Confirm">
+        </form>
+        <div class="clearFloat clearFloat-register"></div>
+    </div>
+    <div class="clearFloat clearFloat-register"></div>
+
+    <th:block th:replace="fragments/footer :: footer"></th:block>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/core.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="../static/js/custom.js" th:src="@{../js/custom.js}"></script>
+
+<script src="../../static/js/jQuery.min.js" th:src="@{/js/jQuery.min.js}"></script>
+
+</html>

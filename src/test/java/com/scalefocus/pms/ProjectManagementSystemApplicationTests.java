@@ -1,0 +1,23 @@
+// All Rights Reserved, Copyright © ScaleFocus
+
+package com.scalefocus.pms;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class ProjectManagementSystemApplicationTests {
+
+    @Test
+    public void contextLoads() {
+    }
+
+    @Test
+    public void main() {
+        ProjectManagementSystemApplication.main(new String[]{});
+    }
+}
+

@@ -1,0 +1,277 @@
+#wrapper {
+    padding-left: 250px;
+    transition: all 0.4s ease 0s;
+}
+
+#sidebar-wrapper {
+    margin-left: -240px;
+    left: 250px;
+    width: 250px;
+    background: #1e2429;
+    margin-top: 10px;
+    position: fixed;
+    height: 60%;
+    /*noinspection CssInvalidPropertyValue*/
+    overflow-y: overlay;
+    transition: all 0.4s ease 0s;
+    border-radius: 5px;
+}
+
+#wrapper.active {
+    padding-left: 0;
+}
+
+#wrapper.active #sidebar-wrapper {
+    left: 0;
+}
+
+#page-content-wrapper {
+    width: 100%;
+}
+
+.content-header {
+    display: none;
+}
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar-nav li {
+    line-height: 40px;
+    text-indent: 20px;
+    border-bottom: 1px solid #bbb8b8;
+}
+
+.sidebar-nav li a {
+    color: #da7c25;
+    display: block;
+    text-decoration: none;
+    padding-left: 60px;
+}
+
+.sidebar-nav li a span:before {
+    position: absolute;
+    left: 0;
+    color: #41484c;
+    text-align: center;
+    width: 20px;
+    line-height: 18px;
+}
+
+.sidebar-nav li a:hover,
+.sidebar-nav li.active {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    line-height: 60px;
+    font-size: 18px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #bbb8b8;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+}
+
+
+.content-header {
+    height: 65px;
+    line-height: 65px;
+}
+
+.content-header h1 {
+    margin: 0;
+    margin-left: 20px;
+    line-height: 65px;
+    display: inline-block;
+}
+
+.well {
+    margin-left: 30px;
+    width: 90%;
+    border: 1px #1e2429 solid;
+    border-radius: 10px;
+
+}
+
+.btn-menu {
+    color: #000;
+}
+
+.inset {
+    padding: 20px;
+}
+
+@media (max-width: 767px) {
+
+    #wrapper {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        left: 0;
+    }
+
+    #wrapper.active {
+        position: relative;
+        left: 250px;
+    }
+
+    .content-header {
+        display: block;
+    }
+
+    #wrapper.active #sidebar-wrapper {
+        left: 250px;
+        width: 250px;
+        transition: all 0.4s ease 0s;
+    }
+
+    #menu-toggle {
+        display: inline-block;
+    }
+
+    .inset {
+        padding: 15px;
+    }
+}
+
+.box a {
+    border-radius: 5px;
+    background-color: #f5f3dc;
+}
+
+
+.box textarea {
+    border-radius: 9px;
+    background-color: #f5f3dc;
+
+}
+
+.box a[type="submit"] {
+    background: #e57528;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    position: relative;
+    height: 60px;
+    font-size: 1.2em;
+    padding: 0 2em;
+    cursor: pointer;
+    transition: 800ms ease all;
+    outline: none;
+    text-decoration: none;
+}
+
+.box a[type="submit"]:hover {
+    top: -5px;
+    box-shadow: 5px 5px 5px rgba(238, 238, 238, 1);
+    -webkit-transform: rotateX(5deg);
+    -moz-transform: rotateX(10deg);
+    -ms-transform: rotateX(5deg);
+    transform: rotateX(5deg);
+}
+
+
+.btn-circle {
+  margin-top:20px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+.btn-circle.btn-lg {
+  width: 50px;
+  height: 50px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 25px;
+}
+.btn-circle.btn-xl {
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  font-size: 24px;
+  line-height: 1.33;
+  border-radius: 35px;
+}
+
+.orange{
+    background-color: #e57528;
+}
+.col-md-9 {
+    position: relative;
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 20px;
+    width: 100%;
+}
+
+.news-container {
+    margin-top: 20px;
+    font-weight: 500;
+}
+
+.button-style a[type="submit"]{
+    background: #e57528;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    position: relative;
+    height: 30px;
+    font-size: 1.5em;
+    padding: 0 2em;
+    cursor: pointer;
+    transition: 500ms ease all;
+    outline: none;
+}
+
+.button-style a[type="submit"]:hover {
+    top: -1px;
+    transform: rotateX(10deg);
+}
+
+.button-style a{
+    border-radius: 5px;
+    background-color: #f5f3dc;
+}
+
+.kris-btn{
+    background: #e57528;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    position: relative;
+    height: 30px;
+    font-size: 1.5em;
+    padding: 0 2em;
+    cursor: pointer;
+    transition: 800ms ease all;
+    outline: none;
+    text-decoration: none;
+}
+
+.clearFloat-news {
+    margin-bottom: 40px;
+}

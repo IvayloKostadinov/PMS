@@ -1,0 +1,48 @@
+<div th:fragment="modal" class="col-md-4">
+
+    <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">Add
+        Phases
+    </button>
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add Phase</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="phaseName" class="col-form-label">Phase Name:</label>
+                        <input type="text" class="form-control"
+                               id="phaseName"
+                               name="phaseName">
+                    </div>
+                    <div class="form-group">
+                        <label for="phaseBudget" class="col-form-label">Budget:</label>
+                        <input type="number" class="form-control "
+                               id="phaseBudget" name="phaseBudget">
+                    </div>
+                    <div class="form-group">
+                        <label for="phaseStartDate">Start Date</label>
+                        <input type="date" class="form-control"
+                               name="phaseStartDate"
+                               id="phaseStartDate"
+                               placeholder="End Date">
+                    </div>
+                    <div class="form-group">
+                        <label for="phaseEndDate">End Date</label>
+                        <input type="date" class="form-control"
+                               name="phaseEndDate" id="phaseEndDate"
+                               placeholder="End Date">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="submitPhase" type="button" class="btn btn-default" data-dismiss="modal">
+                        Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

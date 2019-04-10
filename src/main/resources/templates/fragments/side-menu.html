@@ -1,0 +1,34 @@
+<div sec:authorize="isAuthenticated()" th:fragment="side-menu" class="nav-side-menu" style="display:none"
+     id="mySidebar">
+
+    <div class="menu-list">
+        <ul id="menu-content">
+            <li>
+                <a sec:authorize="isAuthenticated()"
+                   th:href="@{'~/users/' + *{#authentication.getPrincipal().getId()} + '/profile'}"><i
+                        class="fas fa-user-alt"></i>My Profile</a>
+            </li>
+            <li>
+                <a sec:authorize="hasAuthority('ADMIN')" th:href="@{~/register}"><i class="fas fa-user-edit"></i>Register
+                    User</a>
+            </li>
+            <li>
+                <a sec:authorize="hasAuthority('ADMIN')" th:href="@{~/project/new}"><i class="fas fa-edit"></i>Register
+                    Project</a>
+            </li>
+            <li>
+                <a sec:authorize="hasAuthority('ADMIN')" th:href="@{~/teams/create}"> <i
+                        class="fas fa-person-booth"></i>Create team</a>
+            </li>
+            <li>
+                <a sec:authorize="hasAuthority('ADMIN')" th:href="@{~/teams/all}"><i
+                        class="fas fa-people-carry"></i></i>All teams</a>
+            </li>
+            <li>
+                <a sec:authorize="isAuthenticated()" th:href="@{~/users/all-users-page}">
+                    <i class="fa fa-users fa-lg"></i> Users
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

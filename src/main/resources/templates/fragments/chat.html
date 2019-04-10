@@ -1,0 +1,53 @@
+<div th:fragment="chat" class="form-popup" id="myForm">
+  <div id="username-page">
+    <div class="username-page-container box">
+      <h1 class="title">Your username:</h1>
+      <form id="usernameForm" name="usernameForm">
+        <div class="form-group">
+          <input
+            th:value="*{#authentication.getPrincipal().getUsername()}"
+            type="text"
+            id="name"
+            placeholder="Username"
+            autocomplete="off"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <button type="submit" class="accent username-submit">
+            Enter Chat room
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="chat-page" class="hidden row col-md-4">
+    <div class="chat-container col-md-9">
+      <div class="chat-header">
+        <a type="button" class="btn cancel" onclick="closeForm()">
+          <i class="fas fa-times-circle"></i>
+        </a>
+      </div>
+      <div class="connecting">
+        Connecting...
+      </div>
+
+      <ul id="messageArea"></ul>
+      <form id="messageForm" name="messageForm">
+        <div class="form-group">
+          <div class="input-group clearfix">
+            <input
+              type="text"
+              id="message"
+              placeholder="Type a message..."
+              autocomplete="off"
+              class="form-control"
+            />
+            <button type="submit" class="primary">Send</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

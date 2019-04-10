@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title></title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+          crossorigin="anonymous">
+    <link href="../../static/css/login.css" th:href="@{/css/login.css}" type="text/css" rel="stylesheet"/>
+    <link href="../../static/css/profile.css" th:href="@{/css/profile.css}" type="text/css" rel="stylesheet"/>
+    <link href="../../static/css/styles.css" th:href="@{/css/styles.css}" type="text/css" rel="stylesheet"/>
+
+    <link rel="stylesheet" type="text/css" media="all" href="../../static/css/socket.css" th:href="@{/css/socket.css}" />
+
+</head>
+
+<body>
+<th:block th:replace="fragments/navbar :: navbar">
+</th:block>
+<th:block th:replace="fragments/side-menu :: side-menu">
+</th:block>
+
+<div class="row">
+    <div class="col-md-4 user-info-wrapper">
+        <h2>User Details</h2>
+        <div class="user-info" id="manager-info-first">
+            <span>Username : </span>
+            <p th:text="${user.username}"></p>
+        </div>
+        <div class="user-info">
+            <span>First name : </span>
+            <p th:text="${user.firstName}"></p>
+        </div>
+        <div class="user-info">
+            <span>Family name : </span>
+            <p th:text="${user.familyName}"></p>
+        </div>
+        <div class="user-info">
+            <span>Email : </span>
+            <p th:text="${user.email}"></p>
+        </div>
+        <div class="user-info">
+            <span>Inbound Email : </span>
+            <p th:text="${user.inboundEmail}"></p>
+        </div>
+        <div class="user-info">
+            <span>Outbound Email : </span>
+            <p th:text="${user.outboundEmail}"></p>
+        </div>
+        <div class="user-info">
+            <span>Profile Status : </span>
+            <p th:text="${user.statusString()}"></p>
+        </div>
+        <div class="user-info" th:each="authorities : ${user.authorities}">
+            <span>Granted Authority : </span>
+            <p th:text="${authorities.authority}"></p>
+        </div>
+        <div sec:authorize="hasAuthority('ADMIN')" class="row">
+            <div class="col-xs-6 form-custom-buttons">
+                <a th:href="@{'~/users/' + ${user.id} + '/edit'}">Edit</a>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-6 user-projects-wrapper">
+        <h2>Projects</h2>
+        <table class="table table-hover text-centered">
+            <thead>
+            <tr>
+                <th>Project Name</th>
+                <th>Project Number</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="projectNumber : ${projects}">
+                <td class="first-td" th:text="${projectNumber.projectName}">asd</td>
+                <td th:text="${projectNumber.projectNumber}">ads</td>
+                <td class="last-td"><a class="btn btn-default" href="#" th:href="@{'/projects/' + ${projectNumber.id}}" role="button">Show</a>
+                <!--<td><a sec:authorize="hasAuthority('ADMIN')" class="btn btn-default" href="#" th:href="@{'/users/' + ${user.id} + '/delete'}" role="button">Delete</a></td>-->
+                <!--<td><a class="btn btn-default" href="#" role="button">Update</a></td>-->
+
+            </tr>
+            </tbody>
+        </table>
+        <h2>Teams</h2>
+        <table class="table table-hover text-centered">
+            <thead>
+            <tr>
+                <th>Team Name</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="team : ${user.teams}">
+                <td class="first-td" th:text="${team.teamName}">asd</td>
+                <td class="last-td"><a class="btn btn-default" href="#" th:href="@{'/teams/' + ${team.id} + '/members'}" role="button">Show Members</a>
+                <!--<td class="last-td" th:text="${team.projectNumber}">ads</td>-->
+                <!--<td><a sec:authorize="hasAuthority('ADMIN')" class="btn btn-default" href="#" th:href="@{'/users/' + ${user.id} + '/delete'}" role="button">Delete</a></td>-->
+                <!--<td><a class="btn btn-default" href="#" role="button">Update</a></td>-->
+
+            </tr>
+            </tbody>
+        </table>
+        <div class="clearFloat clearFloat-news"></div>
+    </div>
+    <div class="clearFloat clearFloat-news"></div>
+</div>
+<th:block sec:authorize="isAuthenticated()" th:replace="fragments/chat :: chat"></th:block>
+
+<th:block th:replace="fragments/footer :: footer"></th:block>
+
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/core.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script src="../../static/js/custom.js" th:src="@{/js/custom.js}"></script>
+<script src="../static/js/socket.js" th:src="@{/js/socket.js}"></script>
+<script>
+    (function () {
+        connect();
+    })();
+</script>
+</html>

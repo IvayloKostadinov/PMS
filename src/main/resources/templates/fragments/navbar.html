@@ -1,0 +1,61 @@
+<nav th:fragment="navbar" class="navbar navbar-inverse navbar-static-top navbar-fluid navbar-custom">
+  <div class="container-fluid">
+    <div class="toggle-wrap">
+      <span class="toggle-bar"></span>
+    </div>
+    <div class="navbar-header">
+      <ul>
+        <li>
+          <a style="display: inline;color: #e57528;" class="navbar-brand" href="/home">PMS</a>
+        </li>
+      </ul>
+    </div>
+    <ul class="nav navbar-nav collapse navbar-collapse" id="myNavbar">
+      <li class="list-item" id="nav-links"><a href="/home">Home</a></li>
+      <li class="list-item">
+        <a class="nav-links" th:href="@{~/projects}">Projects</a>
+      </li>
+      <li class="list-item">
+        <a class="nav-links" th:href="@{~/news/show}">News</a>
+      </li>
+      <li class="list-item">
+        <a class="nav-links" th:href="@{~/partners}">Partners</a>
+      </li>
+      <li class="list-item">
+        <a class="nav-links" th:href="@{~/contactUs}">Contact Us</a>
+      </li>
+      <li class="list-item">
+        <a class="nav-links" th:href="@{~/aboutUs}">About Us</a>
+      </li>
+      <li sec:authorize="isAuthenticated()" class="list-item">
+        <a  onclick="openForm()">
+          <i class="fab fa-facebook-messenger"></i>
+        </a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right mr-10">
+      <li>
+        <a sec:authorize="isAuthenticated()" style="color: #e57528; font-size: 14px" th:href="@{'/users/' + *{#authentication.getPrincipal().getId()} + '/profile'}"
+          th:text="| Welcome, ${#authentication.getPrincipal().getUsername() + '!'} |"></a>
+      </li>
+      <!--<li>-->
+        <!--<a sec:authorize="isAnonymous()" style="color: #e57528;" href="/register"><span class="glyphicon glyphicon-user"></span>-->
+          <!--Sign Up</a>-->
+      <!--</li>-->
+      <li>
+        <a sec:authorize="isAnonymous()" style="color: #e57528;" href="/login"><span class="glyphicon glyphicon-log-in"></span>
+          Login</a>
+      </li>
+      <li>
+        <a sec:authorize="isAuthenticated()" style="color: #e57528;" href="/logout"><span class="glyphicon glyphicon-log-out"></span>
+          Logout</a>
+      </li>
+    </ul>
+
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+  </div>
+</nav>

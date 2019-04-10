@@ -1,0 +1,177 @@
+* {
+    box-sizing: border-box
+}
+
+/* Style the tab */
+.tab {
+    float: left;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    width: 10%;
+    /*bottom: 0;*/
+    height: 100%;
+    min-height: -webkit-fill-available;
+    min-width: 70px;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+    float: left;
+    display: block;
+    background-color: inherit;
+    color: black;
+    padding: 15px 16px;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current "tab button" class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    float: left;
+    padding: 0px 12px;
+    width: 90%;
+    height: 100%;
+}
+
+.container {
+    margin-left: 0px;
+    padding-left: 0px;
+    background-color: white;
+    width: 100%;
+    min-height: 530px;
+}
+
+.project-dropdown {
+    color: inherit;
+    padding: 6px 4px 5px 4px;
+    width: 15%;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-default {
+    float: right;
+    width: 150px;
+    color: #e57205;
+    margin-right: 1%;
+    background-color: black;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.btn-default button:active {
+    color: #e57205;
+    background-color: black;
+}
+
+.container-fluid-custom-buttons {
+    background-color: inherit;
+    height: 45px;
+}
+
+#mySearch {
+    width: 100%;
+    font-size: 17px;
+    padding: 12px;
+    border:0px solid #ddd;
+    background-color: white;
+}
+
+/*Styling the boxes for Project information*/
+.col-md-9 {
+    position: relative;
+    border: 1px solid #1e2429;
+    border-radius: 20px;
+    width: 49%;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    min-width: 400px;
+    background-color: #f5f5f5;
+}
+
+/*Styling the titles*/
+h2 {
+    /*margin-top: 0px;*/
+    margin-bottom: 0px;
+
+}
+
+.table-left-side {
+    min-height: 400px;
+}
+
+.table-right-side {
+    min-height: 195px;
+    max-height: 195px;
+}
+
+.paragraph-custom {
+    word-wrap: break-word;
+    overflow-y: scroll;
+    min-height: 95px;
+    max-height: 95px;
+}
+
+.custom-team-style {
+    font-size: 17px;
+    width: 62%;
+    margin-left: 38%;
+}
+
+.custom-title-style {
+    color: gray;
+    font-size: 20px;
+}
+
+.custom-info {
+    font-size: 17px;
+    color: black;
+    font-weight: normal;
+}
+
+.table-user-information > tbody > tr {
+    border-top: 1px solid rgb(221, 221, 221);
+    font-size: 14px;
+    color: gray;
+    align-content: center;
+    font-weight: 600;
+}
+
+.table-user-information > tbody > tr:first-child {
+    border-top: 0;
+}
+
+.table-user-information > tbody > tr > td {
+    border-top: 0;
+}
+
+.tabcontent-single {
+    float: none;
+    margin: auto;
+}
+
+hr {
+    margin-top: 0;
+    border-top: 1px solid #dddddd;
+    width: 100%
+}
+
+.btn-default:focus {
+    background-color: black;
+    color: #e57205;
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>PMS</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+          crossorigin="anonymous">
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/styles.css" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/aboutUs.css" th:href="@{/css/aboutUs.css}" />
+
+</head>
+
+<body>
+    <th:block th:replace="fragments/navbar :: navbar">
+    </th:block>
+
+    <th:block th:replace="fragments/side-menu :: side-menu">
+    </th:block>
+
+    <div class="about-section paddingTB60 gray-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 col-sm-6">
+                    <div class="about-title clearfix">
+                        <h1>About <span>PMS</span></h1>
+                        <h3>Our Mission: </h3>
+                        <p class="about-paddingB">Working with visual content like product ideas, advertising material,
+                            or publishing content is challenging.
+
+                            When team members are not co-located, it’s difficult to let everyone contribute in a way
+                            where their ideas are captured and understood by everyone. Valuable input often gets lost
+                            because it’s scattered in emails and meeting notes, and detached from its original visual
+                            context.</p>
+
+                        <p> What if creative teams were able to collaborate online as easily as they do in the offline
+                            world? With comments and feedback directly on top of their drafts? And lots of free spaces
+                            to develop new concepts and ideas?
+
+                            That’s what PMS is, and it’s the reason why creative teams around the globe love
+                            it.</p>
+                        <p>Today, PMS is developing and operating a well-established online collaboration
+                            service for more than half a million users. We are serving customers of all sizes, in a
+                            broad range of industries, from more than 100 countries.</p>
+                        <div class="about-icons">
+                            <!--<ul>-->
+                                <!--<li><a href="http://www.facebook.com/"><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>-->
+                                <!--</li>-->
+                                <!--<li><a href="http://twitter.com/"><i id="social-tw" class="fa fa-twitter-square fa-3x social"></i></a>-->
+                                <!--</li>-->
+                                <!--<li> <a href="http://plus.google.com/"><i id="social-gp" class="fa fa-google-plus-square fa-3x social"></i></a>-->
+                                <!--</li>-->
+                                <!--<li> <a href="mailto:bootsnipp@gmail.com"><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>-->
+                                <!--</li>-->
+                            <!--</ul>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 col-sm-6">
+                    <div class="about-img">
+                        <img src="https://devitems.com/preview/appmom/img/mobile/2.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <th:block th:replace="fragments/footer :: footer"></th:block>
+
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/core.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<script src="../static/js/custom.js" th:src="@{../js/custom.js}"></script>
+<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+
+</html>

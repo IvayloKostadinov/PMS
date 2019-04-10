@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Projects</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+          crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/projects.css"
+          th:href="@{/css/projects.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/styles.css" th:href="@{/css/styles.css}"/>
+</head>
+
+<body>
+<th:block th:replace="fragments/navbar :: navbar">
+</th:block>
+<th:block th:replace="fragments/side-menu :: side-menu">
+</th:block>
+
+<div class="container">
+    <div th:id="${project.getProjectName()}" class="tabcontent tabcontent-single">
+        <div class="container-fluid container-fluid-custom-buttons">
+            <th:block sec:authorize="hasAuthority('ADMIN')">
+                <ul class="nav navbar-nav mr-10">
+                    <li><a style="color: #e57528; font-size: 17px; font-weight: bold"
+                           th:href="@{'/meeting/' + ${project.id} + '/new'}"
+                           th:text="| New Meeting |"></a></li>
+                    <li><a style="color: #e57528; font-size: 17px; font-weight: bold"
+                           th:href="@{'/meeting/' + ${project.id} + '/getAll'}"
+                           th:text="| All Meetings |"></a></li>
+                    <li><a style="color: #e57528; font-size: 17px; font-weight: bold"
+                           th:href="@{'~/teams/' + ${project.team.id} + '/members'}"
+                           th:text="| Team |"></a></li>
+                    <li><a style="color: #e57528; font-size: 17px; font-weight: bold"
+                           th:href="@{'/project/' + ${project.id} + '/documentation/show'}"
+                           th:text="| Documentation |"></a></li>
+                </ul>
+                <button type="button" class="btn btn-default"
+                        th:project-id="${project.getId()}"
+                        onclick="deleteConfirm(getAttribute('project-id'));">Remove project
+                </button>
+                <button type="button" class="btn btn-default"
+                        th:project-id="${project.getId()}"
+                        onclick="location.href='/projects/' + getAttribute('project-id') + '/update';">Edit project
+                </button>
+            </th:block>
+        </div>
+        <hr/>
+
+        <h2 th:text="${project.getProjectName()}" align="center">Project Name</h2><br>
+
+        <div class="col-md-9 col-lg-9 table-left-side">
+            <h3 class="custom-title-style" align="center">PROJECT INFORMATION</h3><br>
+            <table class="table table table-user-information">
+                <tbody>
+                <tr>
+                    <td>PROJECT NUMBER</td>
+                    <td class="custom-info" th:text="${project.getProjectNumber()} ?: '-'">Project Number</td>
+                </tr>
+                <tr>
+                    <td>CLIENT</td>
+                    <td class="custom-info" th:text="${project.getClient().getClientName()} ?: '-'">Client</td>
+                </tr>
+                <tr>
+                    <td>MANAGER</td>
+                    <td class="custom-info"
+                        th:text="${project.getManager().getFirstName() + ' ' + project.getManager().getFamilyName()} ?: '-'">
+                        Manager
+                    </td>
+                </tr>
+                <tr>
+                    <td>START DATE</td>
+                    <td class="custom-info" th:text="${project.getStartDateFormatted()} ?: '-'">Star Date</td>
+                </tr>
+                <tr>
+                    <td>END DATE</td>
+                    <td class="custom-info" th:text="${project.getEndDateFormatted()} ?: '-'">End Date</td>
+                </tr>
+                <tr>
+                    <td>STATUS</td>
+                    <td class="custom-info" th:text="${project.getStatusFormatted()} ?: '-'">STATUS</td>
+                </tr>
+                <tr>
+                    <td>BUDGET</td>
+                    <td class="custom-info" th:text="${project.getBudget()} ?: '-'">Manager</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-9 col-lg-9 table-right-side">
+            <h3 class="custom-title-style" align="center">DESCRIPTION</h3><br>
+            <p class="paragraph-custom" th:text="${project.getDescription()}"></p>
+        </div>
+
+        <div class="col-md-9 col-lg-9 table-right-side">
+            <h3 class="custom-title-style" align="center">TEAM MEMBERS</h3><br>
+            <div class="custom-team-style paragraph-custom" align="left">
+                <th:block th:each=" teamMember : ${project.getTeam().getUsers()}">
+                    <p class="team-members-style"
+                       th:text="${teamMember.getFirstName() + ' ' + teamMember.getFamilyName()}">Some
+                        content</p>
+                </th:block>
+            </div>
+            <div class="clearFloat clearFloat-news"></div>
+        </div>
+    </div>
+    <div class="clearFloat clearFloat-news"></div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/core.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="../static/js/custom.js" th:src="@{../js/custom.js}"></script>
+<script src="../static/js/projects.js" th:src="@{../js/projects.js}"></script>
+</html>
